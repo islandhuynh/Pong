@@ -4,16 +4,16 @@ from pong import Pong
 from scoreboard import Scoreboard
 import time
 
-PLAYER_START_POSITON = [(-360, 30), (-360, 10), (-360, -10),(-360, -30)]
-COMPUTER_START_POSITION = [(360, 30), (360, 10), (360, -10),(360, -30)]
+PLAYER_ONE_START_POSITON = [(-360, 30), (-360, 10), (-360, -10),(-360, -30)]
+PLAYER_TWO_START_POSITION = [(360, 30), (360, 10), (360, -10),(360, -30)]
 
 screen = Screen()
 screen.setup(width=800, height=600)
 screen.bgcolor("black")
 screen.title("Pong by Island Huynh")
 
-player_paddle = Paddle(PLAYER_START_POSITON)
-computer_paddle = Paddle(COMPUTER_START_POSITION)
+player_one_paddle = Paddle(PLAYER_ONE_START_POSITON)
+player_two_paddle = Paddle(PLAYER_TWO_START_POSITION)
 score_keeper = Scoreboard()
 pong = Pong()
 
@@ -23,8 +23,10 @@ def detect_paddle_collision(paddle):
       pong.bounce_x()
 
 screen.listen()
-screen.onkey(player_paddle.move_up, "Up")
-screen.onkey(player_paddle.move_down, "Down")
+screen.onkey(player_one_paddle.move_up, "w")
+screen.onkey(player_one_paddle.move_down, "s")
+screen.onkey(player_two_paddle.move_up, "Up")
+screen.onkey(player_two_paddle.move_down, "Down")
 
 game_is_on = True
 
@@ -37,7 +39,7 @@ while game_is_on:
   if pong.ycor() > 280 or pong.ycor() < -280:
     pong.bounce_y()
 
-  detect_paddle_collision(player_paddle)
-  detect_paddle_collision(computer_paddle)
+  detect_paddle_collision(player_one_paddle)
+  detect_paddle_collision(player_two_paddle)
 
 screen.exitonclick()
