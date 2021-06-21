@@ -43,11 +43,11 @@ while game_is_on:
     pong.bounce_y()
 
   if pong.xcor() > 400:
-    player_one_score.increase_score()
+    player_two_score.increase_score()
     pong.reset()
   
   if pong.xcor() < -400:
-    player_two_score.increase_score()
+    player_one_score.increase_score()
     pong.reset()
 
   detect_paddle_collision(player_one_paddle)
