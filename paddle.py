@@ -6,7 +6,7 @@ DOWN = 270
 class Paddle:
   def __init__(self, starting_position):
     self.starting_positon = starting_position
-    self.paddle = []
+    self.blocks = []
     self.init_paddle()
 
   def init_paddle(self):
@@ -16,15 +16,15 @@ class Paddle:
       block.speed("fastest")
       block.penup()
       block.goto(position)
-      self.paddle.append(block)
+      self.blocks.append(block)
   
   def move_up(self):
-    if self.paddle[0].ycor() < 290:
-      for block_num in range(0, len(self.paddle)):
-        self.paddle[block_num].sety(self.paddle[block_num].ycor() + MOVE_DISTANCE)
+    if self.blocks[0].ycor() < 290:
+      for block_num in range(0, len(self.blocks)):
+        self.blocks[block_num].sety(self.blocks[block_num].ycor() + MOVE_DISTANCE)
 
   def move_down(self):
-    if self.paddle[len(self.paddle) - 1].ycor() > -290:
-      for block_num in range(0, len(self.paddle)):
-        self.paddle[block_num].sety( self.paddle[block_num].ycor() - MOVE_DISTANCE)
+    if self.blocks[len(self.blocks) - 1].ycor() > -290:
+      for block_num in range(0, len(self.blocks)):
+        self.blocks[block_num].sety( self.blocks[block_num].ycor() - MOVE_DISTANCE)
     

@@ -17,6 +17,11 @@ computer_paddle = Paddle(COMPUTER_START_POSITION)
 score_keeper = Scoreboard()
 pong = Pong()
 
+def detect_paddle_collision(paddle):
+  for block in paddle.blocks:
+    if block.distance(pong) < 20:
+      pong.bounce_x()
+
 screen.listen()
 screen.onkey(player_paddle.move_up, "Up")
 screen.onkey(player_paddle.move_down, "Down")
@@ -26,16 +31,13 @@ game_is_on = True
 while game_is_on:
   screen.update()
   time.sleep(0.1)
-  # while pong.xcor() < 290 and pong.ycor() < 390 and pong.xcor() > -290 and pong.ycor() > -390:
   pong.move()
   
-  #Detect collision with wall
+  # Detect collision with wall
   if pong.ycor() > 280 or pong.ycor() < -280:
     pong.bounce_y()
 
-  # Detect collision with paddle
-  for seg in player_paddle.paddle:
-    if seg.distance(pong) < 20:
-      pong.bounce_x()
+  detect_paddle_collision(player_paddle)
+  detect_paddle_collision(computer_paddle)
 
 screen.exitonclick()
